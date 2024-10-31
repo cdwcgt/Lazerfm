@@ -34,7 +34,7 @@ namespace osu.Game.Rulesets.Lazerfm
         public override DifficultyCalculator CreateDifficultyCalculator(IWorkingBeatmap beatmap) =>
             new LazerfmDifficultyCalculator(RulesetInfo, beatmap);
 
-        public override RulesetSettingsSubsection? CreateSettings() => new LazerfmSettingsSubsection(this);
+        public override RulesetSettingsSubsection CreateSettings() => new LazerfmSettingsSubsection(this);
 
         public override IEnumerable<Mod> GetModsFor(ModType type)
         {

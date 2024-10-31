@@ -45,7 +45,7 @@ namespace osu.Game.Rulesets.Lazerfm.Helper
 
             if (depMgr == null)
             {
-                Logger.Log($"DependencyContainer not found", level: LogLevel.Error);
+                Logger.Log("DependencyContainer not found", level: LogLevel.Error);
                 return false;
             }
 
@@ -71,7 +71,6 @@ namespace osu.Game.Rulesets.Lazerfm.Helper
                     {
                         Logger.Error(e, "cannot load components");
                     }
-
                 }, 1);
             }
             catch (Exception e)

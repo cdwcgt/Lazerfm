@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using osu.Framework.Allocation;
 using osu.Framework.Audio.Track;
 using osu.Framework.Bindables;
 using osu.Framework.Graphics;
-using osu.Framework.Threading;
 using osu.Game.Beatmaps;
 using osu.Game.Input;
 using osu.Game.Overlays;
@@ -119,7 +117,10 @@ namespace osu.Game.Rulesets.Lazerfm.Components
         private void sendNowPlaying(MediaItem? mediaItem)
         {
             if (mediaItem == null)
+            {
                 removeNowPlaying();
+                return;
+            }
 
             if (!lastfm.IsLoggedIn.Value)
                 return;
@@ -150,7 +151,7 @@ namespace osu.Game.Rulesets.Lazerfm.Components
         // the track has been played for at least half its duration, or for 4 minutes (whichever occurs earlier.)
         private static double calculateScrobbleWaitingTime(double length) => length >= 800000 ? 400000 : length / 2;
 
-        enum ScrobbleStatus
+        private enum ScrobbleStatus
         {
             Pending,
             NowPlaying,

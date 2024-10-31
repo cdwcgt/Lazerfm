@@ -27,9 +27,9 @@ namespace osu.Game.Rulesets.Lazerfm.Online
         [Resolved]
         private OsuGame? game { get; set; }
 
-        private Bindable<string> sessionKey = new Bindable<string>();
+        private readonly Bindable<string> sessionKey = new Bindable<string>();
 
-        private Bindable<string> username = new Bindable<string>();
+        private readonly Bindable<string> username = new Bindable<string>();
 
         public IBindable<string> Username => username;
 
@@ -82,7 +82,7 @@ namespace osu.Game.Rulesets.Lazerfm.Online
 
             var request = new UserGetInfo();
 
-            request.Failed += (e) =>
+            request.Failed += e =>
             {
                 if (request.Error != null)
                     Logout();
@@ -160,8 +160,10 @@ namespace osu.Game.Rulesets.Lazerfm.Online
         }
 
         // Private method for building the signature required by the Last.fm API to validate a request
-        public string GetMethodSignature(Dictionary<string, string> methodParameters = null)
+        public string GetMethodSignature(Dictionary<string, string>? methodParameters = null)
         {
+            methodParameters ??= new Dictionary<string, string>();
+
             var builder = new StringBuilder();
 
             // Iterate all the parameters to be sent to the request
