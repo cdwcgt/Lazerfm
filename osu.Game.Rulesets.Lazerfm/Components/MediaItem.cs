@@ -25,10 +25,23 @@ namespace osu.Game.Rulesets.Lazerfm.Components
 
         public static MediaItem FromWorkingBeatmap(IWorkingBeatmap workingBeatmap)
         {
+            string trackName = workingBeatmap.BeatmapInfo.Metadata.TitleUnicode;
+            string artistName = workingBeatmap.BeatmapInfo.Metadata.ArtistUnicode;
+
+            if (string.IsNullOrEmpty(trackName))
+            {
+                trackName = workingBeatmap.BeatmapInfo.Metadata.Title;
+            }
+
+            if (string.IsNullOrEmpty(artistName))
+            {
+                artistName = workingBeatmap.BeatmapInfo.Metadata.Artist;
+            }
+
             return new MediaItem
             {
-                TrackName = workingBeatmap.BeatmapInfo.Metadata.TitleUnicode,
-                ArtistName = workingBeatmap.BeatmapInfo.Metadata.ArtistUnicode,
+                TrackName = trackName,
+                ArtistName = artistName,
                 TrackLength = workingBeatmap.Track.Length / 1000,
                 StartedPlaying = DateTimeOffset.UtcNow
             };
