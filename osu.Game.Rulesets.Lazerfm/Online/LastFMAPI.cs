@@ -93,11 +93,11 @@ namespace osu.Game.Rulesets.Lazerfm.Online
                 username.Value = request.ResponseObject.User.Name;
             };
 
-            Perform(request, false);
+            PerformAsync(request, false);
         }
 
-        public Task<T> PerformAsync<T>(LastfmRequest<T> request) =>
-            Task.Factory.StartNew(() => Perform(request), TaskCreationOptions.LongRunning);
+        public Task<T> PerformAsync<T>(LastfmRequest<T> request, bool logWhenFail = true) =>
+            Task.Factory.StartNew(() => Perform(request, logWhenFail), TaskCreationOptions.LongRunning);
 
         private ScheduledDelegate? waitForSessionTokenDelegate;
 
