@@ -8,7 +8,7 @@ this is a plugin for [osu!lazer](https://github.com/ppy/osu), It cab connects la
 
 [Sentakki ruleset install guild](https://github.com/LumpBloom7/sentakki/wiki/Ruleset-installation-guide)
 
-Download [release](https://github.com/cdwcgt/Lazerfm/Release) and then put it to your rulesets folder in lazer data folder.
+Download [lastest release](https://github.com/cdwcgt/Lazerfm/releases/latest) and then put it to your rulesets folder in lazer data folder.
 
 Open game settings and you will find Lazerfm in rulesets subsection.
 
