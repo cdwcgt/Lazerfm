@@ -137,8 +137,13 @@ namespace osu.Game.Rulesets.Lazerfm.Components
             string artist = mediaItem.ArtistName;
 
             var request = new TrackUpdateNowPlaying(artist, title);
-            lastfm.PerformAsync(request);
-            isInNowPlayingStatus = true;
+            lastfm.PerformAsync(request).ContinueWith(t =>
+            {
+                if (t.IsCompletedSuccessfully)
+                {
+                    isInNowPlayingStatus = true;
+                }
+            });
         }
 
         private void removeNowPlaying()
