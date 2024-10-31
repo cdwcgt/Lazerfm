@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using osu.Framework.Allocation;
 using osu.Framework.Audio.Track;
 using osu.Framework.Bindables;
@@ -55,7 +56,10 @@ namespace osu.Game.Rulesets.Lazerfm.Components
 
             var currentMediaItem = MediaItem.FromWorkingBeatmap(beatmap.Value);
 
-            if (music.IsPlaying && (lastMediaItem?.TrackName != currentMediaItem.TrackName || lastMediaItem?.ArtistName != currentMediaItem.ArtistName))
+            if (music.IsPlaying && (lastMediaItem?.TrackName != currentMediaItem.TrackName
+                                    || lastMediaItem?.ArtistName != currentMediaItem.ArtistName
+                                    // Differentiate between versions of different lengths but give a 10 seconds grace period
+                                    || Math.Abs(lastMediaItem.TrackLength - currentMediaItem.TrackLength) > 10))
             {
                 removeNowPlaying();
                 lastMediaItem = currentMediaItem;
