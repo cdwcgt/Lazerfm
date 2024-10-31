@@ -49,12 +49,13 @@ namespace osu.Game.Rulesets.Lazerfm.Components
             if (idleTracker.IsIdle.Value)
             {
                 removeNowPlaying();
+                timeElapsed = 0;
                 return;
             }
 
             var currentMediaItem = MediaItem.FromWorkingBeatmap(beatmap.Value);
 
-            if (music.IsPlaying && (lastMediaItem?.TrackName != currentMediaItem.TrackName && lastMediaItem?.ArtistName != currentMediaItem.ArtistName))
+            if (music.IsPlaying && (lastMediaItem?.TrackName != currentMediaItem.TrackName || lastMediaItem?.ArtistName != currentMediaItem.ArtistName))
             {
                 removeNowPlaying();
                 lastMediaItem = currentMediaItem;
