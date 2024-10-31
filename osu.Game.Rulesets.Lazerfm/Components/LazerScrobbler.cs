@@ -109,6 +109,9 @@ namespace osu.Game.Rulesets.Lazerfm.Components
             if (!lastfm.IsLoggedIn.Value)
                 return;
 
+            if (queuedItems.Count == 0)
+                return;
+
             var request = new TrackScrobble(queuedItems);
             lastfm.PerformAsync(request).ContinueWith(t =>
             {
