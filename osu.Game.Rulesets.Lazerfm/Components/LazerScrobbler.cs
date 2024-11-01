@@ -4,6 +4,7 @@ using osu.Framework.Allocation;
 using osu.Framework.Audio.Track;
 using osu.Framework.Bindables;
 using osu.Framework.Graphics;
+using osu.Framework.Logging;
 using osu.Game.Beatmaps;
 using osu.Game.Input;
 using osu.Game.Overlays;
@@ -23,8 +24,7 @@ namespace osu.Game.Rulesets.Lazerfm.Components
         [Resolved]
         private LastfmAPI lastfm { get; set; } = null!;
 
-        [Resolved]
-        private IdleTracker idleTracker { get; set; } = null!;
+        private readonly IdleTracker idleTracker = new GameIdleTracker(300000);
 
         private readonly List<MediaItem> queuedItems = new List<MediaItem>();
 
@@ -38,8 +38,9 @@ namespace osu.Game.Rulesets.Lazerfm.Components
         private MediaItem? lastMediaItem;
 
         [BackgroundDependencyLoader]
-        private void load()
+        private void load(OsuGame game)
         {
+            game.Add(idleTracker);
             Scheduler.AddDelayed(sendScrobble, 300000, true);
         }
 
@@ -50,7 +51,6 @@ namespace osu.Game.Rulesets.Lazerfm.Components
             if (idleTracker.IsIdle.Value)
             {
                 removeNowPlaying();
-                timeElapsed = 0;
                 return;
             }
 
@@ -63,7 +63,6 @@ namespace osu.Game.Rulesets.Lazerfm.Components
             {
                 removeNowPlaying();
                 lastMediaItem = currentMediaItem;
-                status = ScrobbleStatus.Pending;
                 timeElapsed = 0;
             }
 
@@ -144,6 +143,8 @@ namespace osu.Game.Rulesets.Lazerfm.Components
                     isInNowPlayingStatus = true;
                 }
             });
+
+            Logger.Log($"lastfm: Now playing {title} - {artist}");
         }
 
         private void removeNowPlaying()
@@ -157,6 +158,10 @@ namespace osu.Game.Rulesets.Lazerfm.Components
             var request = new RemoveNowPlaying();
             lastfm.PerformAsync(request);
             isInNowPlayingStatus = false;
+
+            status = ScrobbleStatus.Pending;
+
+            Logger.Log("lastfm: Now playing removed");
         }
 
         private static bool checkTrackLength(ITrack track) => track.Length > 30000;
