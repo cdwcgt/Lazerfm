@@ -164,6 +164,17 @@ namespace osu.Game.Rulesets.Lazerfm.Components
             Logger.Log("lastfm: Now playing removed");
         }
 
+        protected override void Dispose(bool isDisposing)
+        {
+            if (isDisposing)
+            {
+                removeNowPlaying();
+                sendScrobble();
+            }
+
+            base.Dispose(isDisposing);
+        }
+
         private static bool checkTrackLength(ITrack track) => track.Length > 30000;
 
         // the track has been played for at least half its duration, or for 4 minutes (whichever occurs earlier.)
