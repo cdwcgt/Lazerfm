@@ -13,6 +13,7 @@ namespace osu.Game.Rulesets.Lazerfm.UI
     public partial class LazerfmSettingsSubsection : RulesetSettingsSubsection
     {
         private OsuSpriteText userInfoText = null!;
+        private SettingsButton loginButton = null!;
         protected override LocalisableString Header => "Lazerfm";
 
         [Resolved]
@@ -40,7 +41,7 @@ namespace osu.Game.Rulesets.Lazerfm.UI
                         Origin = Anchor.Centre,
                     }
                 },
-                new SettingsButton
+                loginButton = new SettingsButton
                 {
                     Text = "Login to lastfm",
                     Action = lastfmAPI.Login,
@@ -53,11 +54,15 @@ namespace osu.Game.Rulesets.Lazerfm.UI
                 {
                     userInfoText.Text = $"Logged in as {lastfmAPI.Username.Value}.";
                     userInfoText.Colour = colour.Green;
+                    loginButton.Text = "Logout";
+                    loginButton.Action = () => lastfmAPI.Logout();
                 }
                 else
                 {
                     userInfoText.Text = "You have not login yet.";
                     userInfoText.Colour = colour.Red;
+                    loginButton.Text = "Login to lastfm";
+                    loginButton.Action = () => lastfmAPI.Login();
                 }
             }, true);
         }
