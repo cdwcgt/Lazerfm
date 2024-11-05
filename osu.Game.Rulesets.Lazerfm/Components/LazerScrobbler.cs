@@ -84,6 +84,7 @@ namespace osu.Game.Rulesets.Lazerfm.Components
                         {
                             status = ScrobbleStatus.Scrobbled;
                             queuedItems.Add(lastMediaItem);
+                            sendScrobble();
                         }
 
                         break;
@@ -112,11 +113,15 @@ namespace osu.Game.Rulesets.Lazerfm.Components
             var request = new TrackScrobble(queuedItems);
             lastfm.PerformAsync(request).ContinueWith(t =>
             {
+                // no error check here for ensure that subsequent requests will not
+                // continue to fail due to previous data problems.
                 if (t.IsCompletedSuccessfully)
                 {
                     queuedItems.Clear();
                 }
             });
+
+            Logger.Log($"Scrobbled {queuedItems.Count} items");
         }
 
         private void sendNowPlaying(MediaItem? mediaItem)
@@ -136,7 +141,7 @@ namespace osu.Game.Rulesets.Lazerfm.Components
             var request = new TrackUpdateNowPlaying(artist, title);
             lastfm.PerformAsync(request).ContinueWith(t =>
             {
-                if (t.IsCompletedSuccessfully)
+                if (t.IsCompletedSuccessfully && request.Error == null)
                 {
                     isInNowPlayingStatus = true;
                 }
@@ -154,8 +159,13 @@ namespace osu.Game.Rulesets.Lazerfm.Components
                 return;
 
             var request = new RemoveNowPlaying();
-            lastfm.PerformAsync(request);
-            isInNowPlayingStatus = false;
+            lastfm.PerformAsync(request).ContinueWith(t =>
+            {
+                if (t.IsCompletedSuccessfully && request.Error == null)
+                {
+                    isInNowPlayingStatus = false;
+                }
+            });
 
             status = ScrobbleStatus.Pending;
 

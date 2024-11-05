@@ -97,7 +97,7 @@ namespace osu.Game.Rulesets.Lazerfm.Online
         }
 
         public Task<T> PerformAsync<T>(LastfmRequest<T> request, bool logWhenFail = true) =>
-            Task.Factory.StartNew(() => Perform(request, logWhenFail), TaskCreationOptions.LongRunning);
+            Task.Factory.StartNew(() => Perform(request, logWhenFail));
 
         private ScheduledDelegate? waitForSessionTokenDelegate;
 
