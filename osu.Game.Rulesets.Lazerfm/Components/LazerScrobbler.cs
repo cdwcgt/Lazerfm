@@ -28,8 +28,6 @@ namespace osu.Game.Rulesets.Lazerfm.Components
 
         private readonly List<MediaItem> queuedItems = new List<MediaItem>();
 
-        private readonly BindableBool isPlaying = new BindableBool();
-
         private bool isInNowPlayingStatus;
 
         private static ScrobbleStatus status;
