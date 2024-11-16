@@ -23,7 +23,7 @@ namespace osu.Game.Rulesets.Lazerfm
 {
     public partial class LazerfmRuleset : Ruleset
     {
-        public override string Description => "submit your scrobble to lastfm";
+        public override string Description => "Lazerfm";
 
         public override DrawableRuleset CreateDrawableRulesetWith(IBeatmap beatmap, IReadOnlyList<Mod>? mods = null) =>
             new DrawableLazerfmRuleset(this, beatmap, mods);
