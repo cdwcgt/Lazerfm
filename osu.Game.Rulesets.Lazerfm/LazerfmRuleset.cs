@@ -7,7 +7,6 @@ using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
-using osu.Framework.Input.Bindings;
 using osu.Game.Beatmaps;
 using osu.Game.Database;
 using osu.Game.Overlays.Settings;
@@ -46,12 +45,6 @@ namespace osu.Game.Rulesets.Lazerfm
         }
 
         public override string ShortName => "lazerfm";
-
-        public override IEnumerable<KeyBinding> GetDefaultKeyBindings(int variant = 0) => new[]
-        {
-            new KeyBinding(InputKey.Z, LazerfmAction.Button1),
-            new KeyBinding(InputKey.X, LazerfmAction.Button2),
-        };
 
         public override Drawable CreateIcon() => new LastfmIcon();
 
