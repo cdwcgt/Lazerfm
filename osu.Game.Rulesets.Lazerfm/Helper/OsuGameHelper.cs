@@ -67,10 +67,8 @@ namespace osu.Game.Rulesets.Lazerfm.Helper
                     iniConfig.SetValue(LazerfmSettings.LastFmSessionToken, oldToken);
                 }
 
-                realmConfig.SetValue<string>(LazerfmSettings.LastFmSessionToken, "");
-                realmConfig.SetValue<string>(LazerfmSettings.LastFmUsername, "");
-
-                depMgr.CacheAs(typeof(LazerfmRulesetRealmConfigManager), realmConfig);
+                realmConfig.SetValue<string>(LazerfmSettings.LastFmSessionToken, string.Empty);
+                realmConfig.SetValue<string>(LazerfmSettings.LastFmUsername, string.Empty);
 
                 #endregion
 
