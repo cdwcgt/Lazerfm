@@ -5,7 +5,6 @@ using osu.Framework.Localisation;
 using osu.Game.Graphics;
 using osu.Game.Graphics.Sprites;
 using osu.Game.Overlays.Settings;
-using osu.Game.Rulesets.Lazerfm.Configuration;
 using osu.Game.Rulesets.Lazerfm.Online;
 
 namespace osu.Game.Rulesets.Lazerfm.UI
@@ -27,8 +26,6 @@ namespace osu.Game.Rulesets.Lazerfm.UI
         [BackgroundDependencyLoader]
         private void load(OsuColour colour)
         {
-            var config = (LazerfmRulesetConfigManager)Config;
-
             Children = new Drawable[]
             {
                 new Container

@@ -22,7 +22,7 @@ namespace osu.Game.Rulesets.Lazerfm.Online
         private const string api_secret = "f7afcd3ac5f30a99814ddbe47d9fe602";
 
         [Resolved]
-        private LazerfmRulesetConfigManager config { get; set; } = null!;
+        private LazerfmRulesetConfigManager realmConfig { get; set; } = null!;
 
         [Resolved]
         private OsuGame? game { get; set; }
@@ -38,8 +38,7 @@ namespace osu.Game.Rulesets.Lazerfm.Online
         [BackgroundDependencyLoader]
         private void load()
         {
-            config.BindWith(LazerfmSettings.LastFmUsername, username);
-            config.BindWith(LazerfmSettings.LastFmSessionToken, sessionKey);
+            realmConfig.BindWith(LazerfmSettings.LastFmSessionToken, sessionKey);
 
             sessionKey.BindValueChanged(s =>
             {
@@ -62,7 +61,7 @@ namespace osu.Game.Rulesets.Lazerfm.Online
 
             request.Finished += () =>
             {
-                game?.OpenUrlExternally($"http://www.last.fm/api/auth/?api_key={api_key}&token={request.ResponseObject.Token}");
+                game?.OpenUrlExternally($"https://www.last.fm/api/auth/?api_key={api_key}&token={request.ResponseObject.Token}");
                 waitForSessionToken(request.ResponseObject.Token);
             };
 

@@ -1,26 +1,32 @@
-using osu.Game.Configuration;
-using osu.Game.Rulesets.Configuration;
+﻿using osu.Framework.Configuration;
+using osu.Framework.Platform;
 
 namespace osu.Game.Rulesets.Lazerfm.Configuration
 {
-    public class LazerfmRulesetConfigManager : RulesetConfigManager<LazerfmSettings>
+    public class LazerfmRulesetConfigManager : IniConfigManager<LazerfmSettings>
     {
-        public LazerfmRulesetConfigManager(SettingsStore? settings, RulesetInfo ruleset, int? variant = null)
-            : base(settings, ruleset, variant)
+        protected override string Filename => "lastFm.ini";
+
+        public LazerfmRulesetConfigManager(Storage storage)
+            : base(storage)
         {
         }
 
         protected override void InitialiseDefaults()
         {
             base.InitialiseDefaults();
-            SetDefault(LazerfmSettings.LastFmUsername, string.Empty);
             SetDefault(LazerfmSettings.LastFmSessionToken, string.Empty);
         }
     }
 
     public enum LazerfmSettings
     {
-        LastFmUsername,
         LastFmSessionToken,
+
+        #region Remove Next Release
+
+        LastFmUsername
+
+        #endregion
     }
 }

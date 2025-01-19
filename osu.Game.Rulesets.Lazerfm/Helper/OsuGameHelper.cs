@@ -2,6 +2,7 @@
 using osu.Framework.Allocation;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Logging;
+using osu.Framework.Platform;
 using osu.Framework.Threading;
 using osu.Game.Configuration;
 using osu.Game.Database;
@@ -54,7 +55,26 @@ namespace osu.Game.Rulesets.Lazerfm.Helper
                 var scrobbler = new LazerScrobbler();
                 var lastfmApi = new LastfmAPI();
 
-                depMgr.CacheAs(typeof(LazerfmRulesetConfigManager), new LazerfmRulesetConfigManager(new SettingsStore(realm), ruleset.RulesetInfo));
+                #region Remove Next Release
+
+                var realmConfig = new LazerfmRulesetRealmConfigManager(new SettingsStore(realm), ruleset.RulesetInfo);
+                var iniConfig = new LazerfmRulesetConfigManager(gameInstance.Dependencies.Get<Storage>());
+
+                string? oldToken = realmConfig.Get<string>(LazerfmSettings.LastFmSessionToken);
+
+                if (!string.IsNullOrEmpty(oldToken))
+                {
+                    iniConfig.SetValue(LazerfmSettings.LastFmSessionToken, oldToken);
+                }
+
+                realmConfig.SetValue<string>(LazerfmSettings.LastFmSessionToken, "");
+                realmConfig.SetValue<string>(LazerfmSettings.LastFmUsername, "");
+
+                depMgr.CacheAs(typeof(LazerfmRulesetRealmConfigManager), realmConfig);
+
+                #endregion
+
+                depMgr.CacheAs(typeof(LazerfmRulesetConfigManager), iniConfig);
                 depMgr.Cache(scrobbler);
                 depMgr.Cache(lastfmApi);
 
