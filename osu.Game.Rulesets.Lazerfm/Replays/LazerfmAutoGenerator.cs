@@ -25,7 +25,6 @@ namespace osu.Game.Rulesets.Lazerfm.Replays
                 Frames.Add(new LazerfmReplayFrame
                 {
                     Time = hitObject.StartTime,
-                    Position = hitObject.Position,
                     // todo: add required inputs and extra frames.
                 });
             }

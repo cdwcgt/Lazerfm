@@ -17,8 +17,6 @@ namespace osu.Game.Rulesets.Lazerfm.Objects.Drawables
             Size = new Vector2(40);
             Origin = Anchor.Centre;
 
-            Position = hitObject.Position;
-
             // todo: add visuals.
         }
 

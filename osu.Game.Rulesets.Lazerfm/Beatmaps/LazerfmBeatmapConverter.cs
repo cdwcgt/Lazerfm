@@ -6,8 +6,6 @@ using System.Threading;
 using osu.Game.Beatmaps;
 using osu.Game.Rulesets.Lazerfm.Objects;
 using osu.Game.Rulesets.Objects;
-using osu.Game.Rulesets.Objects.Types;
-using osuTK;
 
 namespace osu.Game.Rulesets.Lazerfm.Beatmaps
 {
@@ -28,7 +26,6 @@ namespace osu.Game.Rulesets.Lazerfm.Beatmaps
             {
                 Samples = original.Samples,
                 StartTime = original.StartTime,
-                Position = (original as IHasPosition)?.Position ?? Vector2.Zero,
             };
         }
     }
