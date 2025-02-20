@@ -4,6 +4,8 @@ using System.Reflection;
 
 namespace osu.Game.Rulesets.Lazerfm.Helper
 {
+    // borrow from
+    // https://github.com/MATRIX-feather/LLin/blob/ruleset/osu.Game.Rulesets.Hikariii/Features/ListenerLoader/Utils/HandlerExtension.cs
     public static class HandlerExtension
     {
         private const BindingFlags instance_flag = BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.GetProperty | BindingFlags.GetField;

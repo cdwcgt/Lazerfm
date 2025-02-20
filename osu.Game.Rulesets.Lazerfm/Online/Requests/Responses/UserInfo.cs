@@ -2,6 +2,7 @@
 
 namespace osu.Game.Rulesets.Lazerfm.Online.Requests.Responses
 {
+    // https://github.com/lastfm/lastfm-windows-desktop/blob/52072e40c0f1198bdafccd4aea10841033a5650a/DesktopScrobbler/LastFMApi/Models/UserInfo.cs
     public class UserInfo
     {
         // The name (username) of the user

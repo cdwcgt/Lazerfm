@@ -2,6 +2,7 @@
 
 namespace osu.Game.Rulesets.Lazerfm.Online.Requests.Responses
 {
+    // https://github.com/lastfm/lastfm-windows-desktop/blob/52072e40c0f1198bdafccd4aea10841033a5650a/DesktopScrobbler/LastFMApi/Models/Session.cs
     public class Session
     {
         // The session token
@@ -9,6 +10,7 @@ namespace osu.Game.Rulesets.Lazerfm.Online.Requests.Responses
         public SessionToken SessionToken { get; set; }
     }
 
+    // https://github.com/lastfm/lastfm-windows-desktop/blob/52072e40c0f1198bdafccd4aea10841033a5650a/DesktopScrobbler/LastFMApi/Models/SessionToken.cs
     // A Last.fm API model for a session token
     public class SessionToken
     {

@@ -4,6 +4,7 @@ using osu.Game.Rulesets.Lazerfm.Helper;
 
 namespace osu.Game.Rulesets.Lazerfm.Online.Requests.Responses
 {
+    // https://github.com/lastfm/lastfm-windows-desktop/blob/52072e40c0f1198bdafccd4aea10841033a5650a/DesktopScrobbler/LastFMApi/Models/Scrobble.cs
     // A Last.fm API model for an individual scrobble result
     public class Scrobble
     {
@@ -28,6 +29,7 @@ namespace osu.Game.Rulesets.Lazerfm.Online.Requests.Responses
         public CorrectedStatus Track { get; set; }
     }
 
+    // https://github.com/lastfm/lastfm-windows-desktop/blob/master/DesktopScrobbler/LastFMApi/Models/CorrectedStatus.cs#L6
     public class CorrectedStatus
     {
         [JsonProperty("corrected")]
@@ -40,6 +42,7 @@ namespace osu.Game.Rulesets.Lazerfm.Online.Requests.Responses
         public string? CorrectedText { get; set; } = string.Empty;
     }
 
+    // https://github.com/lastfm/lastfm-windows-desktop/blob/master/DesktopScrobbler/LastFMApi/Models/IgnoredMessage.cs
     public class IgnoredMessage
     {
         // The reason why the item was ignored (largely un-important unless it's because the API limit was exceeded)
@@ -47,6 +50,7 @@ namespace osu.Game.Rulesets.Lazerfm.Online.Requests.Responses
         public ReasonCodes.IgnoredReason Code { get; set; }
     }
 
+    // https://github.com/lastfm/lastfm-windows-desktop/blob/master/DesktopScrobbler/LastFMApi/Models/Scrobbles.cs
     // A Last.fm API for a list of scrobbles, and their accepted status
     public class Scrobbles
     {
@@ -60,6 +64,7 @@ namespace osu.Game.Rulesets.Lazerfm.Online.Requests.Responses
         public List<Scrobble> ScrobbleItems { get; set; }
     }
 
+    // https://github.com/lastfm/lastfm-windows-desktop/blob/master/DesktopScrobbler/LastFMApi/Models/ScrobbleResponse.cs
     public class ScrobbleResponse
     {
         // The list of scrobble results
@@ -67,6 +72,7 @@ namespace osu.Game.Rulesets.Lazerfm.Online.Requests.Responses
         public Scrobbles Scrobbles { get; set; }
     }
 
+    // https://github.com/lastfm/lastfm-windows-desktop/blob/52072e40c0f1198bdafccd4aea10841033a5650a/DesktopScrobbler/LastFMApi/Models/AcceptedStatus.cs#L6
     // Model representing the Accepted and Ignored state of a Scrobble
     public class AcceptedResult
     {

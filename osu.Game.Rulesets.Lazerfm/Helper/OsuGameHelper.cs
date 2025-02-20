@@ -13,6 +13,8 @@ using osu.Game.Utils;
 
 namespace osu.Game.Rulesets.Lazerfm.Helper
 {
+    // borrow and modify form
+    // https://github.com/MATRIX-feather/LLin/blob/096f567bfbde08902b07d878d394a3b04e38f555/osu.Game.Rulesets.Hikariii/Features/ListenerLoader/ListenerLoader.cs#
     public partial class OsuGameHelper : CompositeDrawable
     {
         /// <summary>
