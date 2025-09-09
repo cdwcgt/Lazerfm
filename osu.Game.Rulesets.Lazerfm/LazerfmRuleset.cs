@@ -57,10 +57,9 @@ namespace osu.Game.Rulesets.Lazerfm
                 [
                     new SpriteIcon
                     {
-                        Size = new Vector2(0.6f),
                         Anchor = Anchor.Centre,
                         Origin = Anchor.Centre,
-                        Icon = FontAwesome.Get(0xf202),
+                        Icon = FontAwesome.Brands.Lastfm,
                         RelativeSizeAxes = Axes.Both,
                     }
                 ];
